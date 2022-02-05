@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="shopping-list">
+        <h1>{{ header || 'Welcome'}}</h1>
+        <div class="add-item-form">
+            <input @keyup.enter="items.push({id:items.length + 1, label: newItem})" type="text" v-model="newItem" placeholder = "Add an Item">
+            <label>
+                <input type="checkbox" v-model="newItemHighPrioriry">
+                High Priority
+            </label>
+            
+            <button @click="items.push({id:items.length + 1, label: newItem})"class="btn btn-primary">save Item</button>
+        </div>
+
+        <ul>
+            <li v-for="(item, index) in items" :key="item.id">{{ item.label }}</li>
+        </ul>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    header: "Shopping List App",
+                    newItem: '',
+                    newItemHighPriority: false,
+                    items: [
+                        {id: 1, label:'10 party hats'},
+                        {id: 2, label:'2 board games'},
+                        {id: 3, label:'20 cups'},  
+                    ]
+                }
+            }
+        })
+        .mount('#shopping-list')
+    </script>
+    
+</body>
+</html>
